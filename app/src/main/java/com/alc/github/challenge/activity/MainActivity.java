@@ -42,6 +42,11 @@ public class MainActivity extends AppCompatActivity {
         initRetrofitAndGetData();
     }
 
+    private void prepareData(GitUserResponse gitUserResponse){
+        recyclerView.setAdapter(new GitUserAdapter(gitUserResponse.getItems(), R.layout.list_item_git_user, getApplication()));
+
+    }
+
     public void initRetrofitAndGetData() {
 
         if (retrofit == null) {
@@ -53,17 +58,18 @@ public class MainActivity extends AppCompatActivity {
 
     GitApiService gitApiService = retrofit.create(GitApiService.class);
 
-    Map<String, String> data = new HashMap<>();
-    data.put("location","lagos");
-    data.put("language","java");
+//    Map<String, String> data = new HashMap<>();
+//    data.put("location","lagos");
+//    data.put("language","java");
 
-    Call<GitUserResponse> call = gitApiService.getLagosJavaUsers(data);
+    Call<GitUserResponse> call = gitApiService.getLagosJavaUsers("language:java location:lagos");
     call.enqueue(new Callback<GitUserResponse>()
     {
         @Override
         public void onResponse(Call<GitUserResponse> call, Response <GitUserResponse> response){
-        List<GitUser> gitUsers = response.body().getItems();
-        recyclerView.setAdapter(new GitUserAdapter(gitUsers, R.layout.list_item_git_user, getApplicationContext()));
+        GitUserResponse gitUsers = response.body();
+            prepareData(gitUsers);
+
         Log.d(TAG, "Number of movies received: " + gitUsers.size());
     }
 

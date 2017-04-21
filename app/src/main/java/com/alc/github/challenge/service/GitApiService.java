@@ -16,7 +16,7 @@ import retrofit2.http.Path;
 public interface GitApiService {
 
     @GET("search/users")
-    Call<GitUserResponse> getLagosJavaUsers(@QueryMap Map<String, String> options);
+    Call<GitUserResponse> getLagosJavaUsers(@Query("q") String params);
 
     @GET("search/users/{id}")
     Call<GitUserResponse> getUserDetails(@Path("id") int id, @Query("api_key") String apiKey);

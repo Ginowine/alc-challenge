@@ -43,4 +43,8 @@ public class GitUserResponse {
         this.items = items;
     }
 
+    public int size(){
+        return items.size();
+    }
+
 }
