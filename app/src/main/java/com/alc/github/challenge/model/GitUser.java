@@ -1,12 +1,15 @@
 package com.alc.github.challenge.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by Gino Osahon on 20/04/2017.
  */
-public class GitUser {
+public class GitUser{
 
     @SerializedName("login")
     @Expose
@@ -64,9 +67,9 @@ public class GitUser {
     private float score;
 
 
-    public GitUser(String login, int id, String avatarUrl, String gravatarId, String url, String htmlUrl, String followersUrl, String followingUrl,
-                   String gistsUrl, String starredUrl, String subscriptionsUrl, String organizationsUrl, String reposUrl, String eventsUrl, String receivedEventsUrl,
-                   String type, boolean siteAdmin, float score){
+        public GitUser(String login, int id, String avatarUrl, String gravatarId, String url, String htmlUrl, String followersUrl, String followingUrl,
+                       String gistsUrl, String starredUrl, String subscriptionsUrl, String organizationsUrl, String reposUrl, String eventsUrl, String receivedEventsUrl,
+                       String type, boolean siteAdmin, float score){
         this.login = login;
         this.id = id;
         this.avatarUrl = avatarUrl;
@@ -87,6 +90,7 @@ public class GitUser {
         this.score = score;
 
     }
+
 
     public String getLogin() {
         return login;
@@ -231,4 +235,31 @@ public class GitUser {
     public void setScore(float score) {
         this.score = score;
     }
+
+//
+//    @Override
+//    public void writeToParcel(Parcel parcel, int i) {
+//        parcel.writeString(login);
+//        parcel.writeInt(id);
+//        parcel.writeString(avatarUrl);
+//        parcel.writeString(gravatarId);
+//        parcel.writeString(url);
+//        parcel.writeString(htmlUrl);
+//        parcel.writeString(followersUrl);
+//        parcel.writeString(followingUrl);
+//        parcel.writeString(gistsUrl);
+//        parcel.writeString(starredUrl);
+//        parcel.writeString(subscriptionsUrl);
+//        parcel.writeString(organizationsUrl);
+//        parcel.writeString(reposUrl);
+//        parcel.writeString(eventsUrl);
+//        parcel.writeString(receivedEventsUrl);
+//        parcel.writeString(type);
+//        parcel.writeFloat(score);
+//    }
+//
+//    @Override
+//    public int describeContents() {
+//        return 0;
+//    }
 }
