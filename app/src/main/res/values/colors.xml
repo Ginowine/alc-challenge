@@ -7,4 +7,6 @@
     <color name="colorBlack">#555555</color>
     <color name="white">#FFFFFF</color>
     <color name="dark_grey">#424242</color>
+    <color name="indigo">#4b0082</color>
+    <color name="blue">#0D47A1</color>
 </resources>
