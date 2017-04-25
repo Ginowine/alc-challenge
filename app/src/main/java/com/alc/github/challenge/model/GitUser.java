@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Created by Gino Osahon on 20/04/2017.
  */
-public class GitUser{
+public class GitUser implements Parcelable{
 
     @SerializedName("login")
     @Expose
@@ -20,77 +20,24 @@ public class GitUser{
     @SerializedName("avatar_url")
     @Expose
     private String avatarUrl;
-    @SerializedName("gravatar_id")
-    @Expose
-    private String gravatarId;
+
     @SerializedName("url")
     @Expose
     private String url;
-    @SerializedName("html_url")
-    @Expose
-    private String htmlUrl;
-    @SerializedName("followers_url")
-    @Expose
-    private String followersUrl;
-    @SerializedName("following_url")
-    @Expose
-    private String followingUrl;
-    @SerializedName("gists_url")
-    @Expose
-    private String gistsUrl;
-    @SerializedName("starred_url")
-    @Expose
-    private String starredUrl;
-    @SerializedName("subscriptions_url")
-    @Expose
-    private String subscriptionsUrl;
-    @SerializedName("organizations_url")
-    @Expose
-    private String organizationsUrl;
-    @SerializedName("repos_url")
-    @Expose
-    private String reposUrl;
-    @SerializedName("events_url")
-    @Expose
-    private String eventsUrl;
-    @SerializedName("received_events_url")
-    @Expose
-    private String receivedEventsUrl;
-    @SerializedName("type")
-    @Expose
-    private String type;
-    @SerializedName("site_admin")
-    @Expose
-    private boolean siteAdmin;
-    @SerializedName("score")
-    @Expose
-    private float score;
 
-
-        public GitUser(String login, int id, String avatarUrl, String gravatarId, String url, String htmlUrl, String followersUrl, String followingUrl,
-                       String gistsUrl, String starredUrl, String subscriptionsUrl, String organizationsUrl, String reposUrl, String eventsUrl, String receivedEventsUrl,
-                       String type, boolean siteAdmin, float score){
+        public GitUser(String login, int id, String avatarUrl, String url){
         this.login = login;
         this.id = id;
         this.avatarUrl = avatarUrl;
-        this.gravatarId = gravatarId;
         this.url = url;
-        this.htmlUrl = htmlUrl;
-        this.followersUrl = followersUrl;
-        this.followingUrl = followingUrl;
-        this.gistsUrl = gistsUrl;
-        this.starredUrl = starredUrl;
-        this.subscriptionsUrl = subscriptionsUrl;
-        this.organizationsUrl = organizationsUrl;
-        this.reposUrl = reposUrl;
-        this.eventsUrl = eventsUrl;
-        this.receivedEventsUrl = receivedEventsUrl;
-        this.type = type;
-        this.siteAdmin = siteAdmin;
-        this.score = score;
-
     }
 
+    public GitUser(Parcel in){
+        login = in.readString();
+        id = in.readInt();
+        avatarUrl = in.readString();
+        url = in.readString();
+    }
 
     public String getLogin() {
         return login;
@@ -116,13 +63,6 @@ public class GitUser{
         this.avatarUrl = avatarUrl;
     }
 
-    public String getGravatarId() {
-        return gravatarId;
-    }
-
-    public void setGravatarId(String gravatarId) {
-        this.gravatarId = gravatarId;
-    }
 
     public String getUrl() {
         return url;
@@ -132,134 +72,29 @@ public class GitUser{
         this.url = url;
     }
 
-    public String getHtmlUrl() {
-        return htmlUrl;
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
-    public void setHtmlUrl(String htmlUrl) {
-        this.htmlUrl = htmlUrl;
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(login);
+        parcel.writeInt(id);
+        parcel.writeString(url);
+        parcel.writeString(avatarUrl);
     }
 
-    public String getFollowersUrl() {
-        return followersUrl;
-    }
+    public static final Parcelable.Creator<GitUser> CREATOR = new Parcelable.Creator<GitUser>(){
+        @Override
+        public GitUser createFromParcel(Parcel parcel) {
+            return new GitUser(parcel);
+        }
 
-    public void setFollowersUrl(String followersUrl) {
-        this.followersUrl = followersUrl;
-    }
-
-    public String getFollowingUrl() {
-        return followingUrl;
-    }
-
-    public void setFollowingUrl(String followingUrl) {
-        this.followingUrl = followingUrl;
-    }
-
-    public String getGistsUrl() {
-        return gistsUrl;
-    }
-
-    public void setGistsUrl(String gistsUrl) {
-        this.gistsUrl = gistsUrl;
-    }
-
-    public String getStarredUrl() {
-        return starredUrl;
-    }
-
-    public void setStarredUrl(String starredUrl) {
-        this.starredUrl = starredUrl;
-    }
-
-    public String getSubscriptionsUrl() {
-        return subscriptionsUrl;
-    }
-
-    public void setSubscriptionsUrl(String subscriptionsUrl) {
-        this.subscriptionsUrl = subscriptionsUrl;
-    }
-
-    public String getOrganizationsUrl() {
-        return organizationsUrl;
-    }
-
-    public void setOrganizationsUrl(String organizationsUrl) {
-        this.organizationsUrl = organizationsUrl;
-    }
-
-    public String getReposUrl() {
-        return reposUrl;
-    }
-
-    public void setReposUrl(String reposUrl) {
-        this.reposUrl = reposUrl;
-    }
-
-    public String getEventsUrl() {
-        return eventsUrl;
-    }
-
-    public void setEventsUrl(String eventsUrl) {
-        this.eventsUrl = eventsUrl;
-    }
-
-    public String getReceivedEventsUrl() {
-        return receivedEventsUrl;
-    }
-
-    public void setReceivedEventsUrl(String receivedEventsUrl) {
-        this.receivedEventsUrl = receivedEventsUrl;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public boolean isSiteAdmin() {
-        return siteAdmin;
-    }
-
-    public void setSiteAdmin(boolean siteAdmin) {
-        this.siteAdmin = siteAdmin;
-    }
-
-    public float getScore() {
-        return score;
-    }
-
-    public void setScore(float score) {
-        this.score = score;
-    }
-
-//
-//    @Override
-//    public void writeToParcel(Parcel parcel, int i) {
-//        parcel.writeString(login);
-//        parcel.writeInt(id);
-//        parcel.writeString(avatarUrl);
-//        parcel.writeString(gravatarId);
-//        parcel.writeString(url);
-//        parcel.writeString(htmlUrl);
-//        parcel.writeString(followersUrl);
-//        parcel.writeString(followingUrl);
-//        parcel.writeString(gistsUrl);
-//        parcel.writeString(starredUrl);
-//        parcel.writeString(subscriptionsUrl);
-//        parcel.writeString(organizationsUrl);
-//        parcel.writeString(reposUrl);
-//        parcel.writeString(eventsUrl);
-//        parcel.writeString(receivedEventsUrl);
-//        parcel.writeString(type);
-//        parcel.writeFloat(score);
-//    }
-//
-//    @Override
-//    public int describeContents() {
-//        return 0;
-//    }
+        @Override
+        public GitUser[] newArray(int size) {
+            return new GitUser[size];
+        }
+    };
 }

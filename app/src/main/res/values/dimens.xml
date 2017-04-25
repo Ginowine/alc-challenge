@@ -8,4 +8,6 @@
     <dimen name="card_title_height">40dp</dimen>
     <dimen name="app_bar_height">256dp</dimen>
     <dimen name="article_keylines">72dp</dimen>
+
+    <dimen name="git_username">20sp</dimen>
 </resources>

@@ -24,7 +24,7 @@ import java.util.List;
  */
 public class GitUserAdapter extends RecyclerView.Adapter<GitUserAdapter.GitUserViewHolder> {
 
-    private List<GitUser> gitUserList;
+    public List<GitUser> gitUserList;
     private int rowLayout;
     private Context context;
 
@@ -52,55 +52,64 @@ public class GitUserAdapter extends RecyclerView.Adapter<GitUserAdapter.GitUserV
         public GitUserViewHolder(View view){
             super(view);
 
+
             profileImage = (ImageView) view.findViewById(R.id.profile_image);
             username = (TextView) view.findViewById(R.id.username);
-
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    GitUserAdapter git = new GitUserAdapter();
-                    String mImageUrl = git.image_url;
-                    String mUsername = git.gitUsername;
-                    String mProfileUrl = git.profileUrl;
-
-                    int position = getAdapterPosition();
-
-                    Context context = v.getContext();
-                    Intent intent = new Intent(context, DetailActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("image", mImageUrl);
-                    bundle.putString("name", mUsername);
-                    bundle.putString("profileUrl", mProfileUrl);
-                    bundle.putInt("position", position);
-                    //intent.putExtra(DetailActivity.EXTRA_POSITION, getAdapterPosition());
-                    intent.putExtras(bundle);
-                    context.startActivity(intent);
-                }
-            });
+//
+//            view.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    GitUserAdapter gitUserAdapter = new GitUserAdapter();
+//                    final GitUser user = gitUserAdapter.gitUserList.get
+//
+//                    int position = getAdapterPosition();
+//
+//                    Context context = v.getContext();
+//                    Intent intent = new Intent(context, DetailActivity.class);
+//                    Bundle bundle = new Bundle();
+//
+//
+//                    bundle.putInt("position", position);
+//                    //intent.putExtra(DetailActivity.EXTRA_POSITION, getAdapterPosition());
+//                    intent.putExtras(bundle);
+//                    context.startActivity(intent);
+//                }
+//            });
         }
     }
 
     @Override
     public GitUserViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(rowLayout, parent,false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(rowLayout, parent,false);
 
-        return new GitUserViewHolder(view);
+        return new GitUserViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(GitUserViewHolder holder, int position) {
-        image_url = gitUserList.get(position).getAvatarUrl();
+    public void onBindViewHolder(final GitUserViewHolder holder, int position) {
+
+        final GitUser user = gitUserList.get(position);
+        //image_url = gitUserList.get(position).getAvatarUrl();
 
         Picasso.with(context)
-                .load(image_url)
+                .load(user.getAvatarUrl())
                 .placeholder(android.R.drawable.sym_def_app_icon)
                 .error(android.R.drawable.sym_def_app_icon)
                 .into(holder.profileImage);
-        holder.username.setText(gitUserList.get(position).getLogin());
+        holder.username.setText(user.getLogin());
 
-        gitUsername = gitUserList.get(position).getLogin();
-        profileUrl = gitUserList.get(position).getUrl();
+        //gitUsername = gitUserList.get(position).getLogin();
+        //profileUrl = gitUserList.get(position).getUrl();
+
+        holder.itemView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Context context = holder.itemView.getContext();
+                Intent intent = new Intent(context, DetailActivity.class);
+                intent.putExtra("user", user);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
