@@ -17,7 +17,7 @@ public class Share {
     public static void shareCustom(String message, Context context)
     {
         String text = message;
-        List<Intent> targetShareIntents=new ArrayList<Intent>();
+        List<Intent> targetShareIntents=new ArrayList<>();
         Intent shareIntent=new Intent();
         shareIntent.setAction(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");

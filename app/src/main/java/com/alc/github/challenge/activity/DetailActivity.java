@@ -48,7 +48,7 @@ public class DetailActivity extends AppCompatActivity {
         shareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                shareUserProfile();
+                shareGitUserProfile();
             }
         });
 
@@ -64,7 +64,7 @@ public class DetailActivity extends AppCompatActivity {
             displayDetails(gitUsername, gitProfileImageUrl, gitProfileUrl);
         }
 
-        collapsingToolbarLayout.setTitle("Welcome" +gitUsername);
+        collapsingToolbarLayout.setTitle("Welcome" + gitUsername);
     }
 
     public void displayDetails(String name, String url, String image){
@@ -94,11 +94,11 @@ public class DetailActivity extends AppCompatActivity {
     }
 
 
-    public void shareUserProfile(){
+    public void shareGitUserProfile(){
         GitUser user = getIntent().getParcelableExtra("user");
 
         String message = "Check out this awesome developer @" + user.getLogin() + ", " + user.getUrl();
-        Share.shareCustom(message, context);
+        Share.shareCustom(message, this);
 
     }
 }

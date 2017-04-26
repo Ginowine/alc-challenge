@@ -52,7 +52,6 @@ public class GitUserAdapter extends RecyclerView.Adapter<GitUserAdapter.GitUserV
         public GitUserViewHolder(View view){
             super(view);
 
-
             profileImage = (ImageView) view.findViewById(R.id.profile_image);
             username = (TextView) view.findViewById(R.id.username);
 //
@@ -89,7 +88,6 @@ public class GitUserAdapter extends RecyclerView.Adapter<GitUserAdapter.GitUserV
     public void onBindViewHolder(final GitUserViewHolder holder, int position) {
 
         final GitUser user = gitUserList.get(position);
-        //image_url = gitUserList.get(position).getAvatarUrl();
 
         Picasso.with(context)
                 .load(user.getAvatarUrl())
@@ -97,9 +95,6 @@ public class GitUserAdapter extends RecyclerView.Adapter<GitUserAdapter.GitUserV
                 .error(android.R.drawable.sym_def_app_icon)
                 .into(holder.profileImage);
         holder.username.setText(user.getLogin());
-
-        //gitUsername = gitUserList.get(position).getLogin();
-        //profileUrl = gitUserList.get(position).getUrl();
 
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
